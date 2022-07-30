@@ -22,13 +22,13 @@
 
     }
 
-    form h1{
+    .form-cls h1{
         margin: 10px auto;
         text-align: center;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 
-    form{
+    .form-cls{
         border-top: 1px solid black;
     }
 
@@ -50,13 +50,13 @@
         border-radius: 6px;
     }
 
-    form button{
+    .form-cls button{
         width: 100%;
         background-color: blueviolet;
         color: white;
     }
 
-    form button:hover{
+    .form-cls button:hover{
         border-radius: 20px;
         font-size: large;
     }
@@ -77,6 +77,20 @@
         background-color: white;
     }
 
+    .btn-read-later{
+        height: 15%;
+        width: 15%;
+        font-size: small;
+        background: whitesmoke;
+        color: black;
+        margin: 0 10px;
+        cursor: pointer;
+    }
+
+    .btn-read-later:hover{
+        background: black;
+        color: white;
+    }
 </style>
 
 {% endblock %}
@@ -88,9 +102,18 @@
     <h2>
         {{post.title}} <br />
         <span>
-            {% for tag in tags %}
+            {% for tag in post_tags %}
                 <span style="font-size: 10pt; background-color: lightblue; margin: 0 5px;padding:6px;border-radius: 20px;">{{tag.caption}} </span>
             {% endfor %}
+            <form action="{% url 'read-later' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="post_id" value="{{ post.id }}">
+                {% if saved_for_later %}
+                <button class="btn-read-later">Remove From Read Later</button>
+                {% else %}
+                <button class="btn-read-later">Read Later</button>
+                {% endif %}
+            </form>
         </span>
     </h2>
 
@@ -111,8 +134,25 @@
     </div>
 </main>
 
+<article class="container">
+    {% for cmt in comments %}
+    <div class="card mt-4">
+        <div class="card" style="border:1px solid black;">
+            <div class="card-header">
+              Comment
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>{{cmt.text}}</p>
+                <footer class="blockquote-footer">{{cmt.user_name}}</footer>
+              </blockquote>
+            </div>
+          </div>
+    {% endfor %}
+</article>
+
 <main class="container">
-    <form action="{% url 'hole_post' post.slug %}" method="POST">
+    <form class="form-cls" action="{% url 'hole_post' post.slug %}" method="POST">
         {% csrf_token %}
        <h1>Your Comment</h1>
        {% for form_field in comment_form %}

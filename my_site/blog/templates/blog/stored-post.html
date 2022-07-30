@@ -1,0 +1,28 @@
+{% extends 'skeleton.html' %}
+
+{% block title%}My Stored Post{% endblock %}
+
+{% block styless %}
+<style>
+    .card {
+        border: 1px solid black;
+        padding: 10px;
+        font-weight: bolder;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="container" style="margin-top: 20%;">
+    <div class="card" style="width: 18rem;margin:0 auto;text-align: center;">
+        {% if not has_posts %}
+        <p>You didn't save any post for later.</p>
+        {% endif %}
+        <ul class="list-group list-group-flush">
+            {% for post in posts %}
+            <li class="list-group-item"><a href="{% url 'hole_post' post.slug %}">{{post.title}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock %}
