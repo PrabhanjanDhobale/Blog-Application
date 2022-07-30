@@ -1,0 +1,13 @@
+<article class="col-xl-4 col-lg-auto col-md-auto col-sm-12 col-xs-autox mt-3">
+    <a href="{% url 'hole_post' post.slug %}">
+
+        <div class="card text-light bg-dark" style="width: 18rem;">
+            <img src="{{ post.image.url }}" class="card-img-top border border-primary" alt="{{ post.title }}">
+            <div class="card-body">
+                <h5 class="card-title text-center">{{ post.title }}</h5>
+                <hr/>
+                <p class="card-text">{{post.excerpt|slice:50}}...</p>
+            </div>
+        </div>
+    </a>
+</article>

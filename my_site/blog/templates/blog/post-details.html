@@ -1,0 +1,129 @@
+{% extends 'skeleton.html' %}
+{% load static %}
+
+
+{% block styless %}
+<style>
+    .img-blog {
+        width: 90%;
+        height: 30rem;
+        margin: 0 8%;
+        border-radius: 20px;
+    }
+
+    h2 {
+        margin-top: 6rem;
+        margin-bottom: 3rem;
+        text-decoration: underline;
+    }
+
+    .main-blog {
+        border-left: 1px solid black;
+
+    }
+
+    form h1{
+        margin: 10px auto;
+        text-align: center;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    form{
+        border-top: 1px solid black;
+    }
+
+    .form-control{
+        margin-bottom: 1rem;
+    }
+
+    .form-control label{
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .form-control input, .form-control textarea{
+        display: block;
+        width: 100%;
+        font: inherit;
+        padding: 0.25rem;
+        border-radius: 6px;
+    }
+
+    form button{
+        width: 100%;
+        background-color: blueviolet;
+        color: white;
+    }
+
+    form button:hover{
+        border-radius: 20px;
+        font-size: large;
+    }
+
+    .errorlist {
+        list-style: none;
+        margin: 0.5rem 0;
+        padding: 0;
+        color: red;
+    }
+
+    .invalid label{
+        color: red;
+    }
+
+    .invalid input, .invalid textarea{
+        border-color: red;
+        background-color: white;
+    }
+
+</style>
+
+{% endblock %}
+
+{% block title%}Prabhanjan's Blog : {{post.title}}{% endblock %}
+
+{% block content %}
+<section class="container">
+    <h2>
+        {{post.title}} <br />
+        <span>
+            {% for tag in tags %}
+                <span style="font-size: 10pt; background-color: lightblue; margin: 0 5px;padding:6px;border-radius: 20px;">{{tag.caption}} </span>
+            {% endfor %}
+        </span>
+    </h2>
+
+
+    <article>
+        <!-- <img src="..." class="img-fluid" alt="..."> -->
+        <img class="img-blog text-center" src="{{ post.image.url }}" alt="{{post.title}}" />
+        <address class="text-center">Author :- <a href="mailto:{{post.author.email_address}}">{{post.author}}</a></address>
+        <div class="text-center">
+            Last Updated on <time>{{post.date| date:'d M Y'}}</time>
+        </div>
+    </article>
+</section>
+
+<main class="container main-blog">
+    <div class="m-5">
+        {{post.content| linebreaksbr}}
+    </div>
+</main>
+
+<main class="container">
+    <form action="{% url 'hole_post' post.slug %}" method="POST">
+        {% csrf_token %}
+       <h1>Your Comment</h1>
+       {% for form_field in comment_form %}
+        <div class="form-control {% if form_field_errors %} invalid {% endif %}">
+            {{form_field.label_tag}}
+            {{form_field}}
+            {{form_field.errors}}
+        </div>
+       {% endfor %}
+       <button>Comment</button>
+    </form>
+</main>
+
+{% endblock %}

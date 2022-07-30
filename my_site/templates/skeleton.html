@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Prabhanjan Dhobale" content="This is my personal blog site. Where I'am gonna share my knowledge..">
+    <meta name="What I Talk About ? "
+        content="Data Science | Data Analytics | Python | Power BI | Tableau | SQL | PL/SQL | Machine Learning | Networking | Docker | Kubernet | AWS">
+    <meta name="robots" content="index, archived">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+
+    {% block styless %} {% endblock %}
+    <title>{% block title%} {% endblock %}</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar fixed-top navbar-dark bg-dark">
+            <!-- Navbar content -->
+            <div class="container-fluid">
+                <br />
+                <a class="navbar-brand" href="{% url 'index' %}">Prabhanjan's Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'posts' %}">All Posts</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    {% block content %}
+
+    {% endblock %}
+
+    <section class="container-fluid bg-dark text-white text-center mt-5 pb-1">
+        <h2 class="pt-3">What i do ? </h2>
+        <p> Data Science | Data Analytics | Python | Power BI | Tableau | SQL | PL/SQL | Machine Learning | Networking |
+            Docker | Kubernet | AWS <br /> My goal is to keep going on as a developer. This make me Happy :)</p>
+    </section>
+
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+</body>
+
+</html>

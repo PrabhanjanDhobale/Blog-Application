@@ -1,0 +1,30 @@
+{% extends 'skeleton.html' %}
+{% load static %}
+
+{% block styless %}
+<!-- <link rel="stylesheet" href="{% static 'blog/post.css' %}"> -->
+<link rel="stylesheet" href="{% static 'blog/index.css' %}">
+{% endblock %}
+
+{% block title %}
+Prabhanjan Dhobale | My Blogs
+{% endblock %}
+
+{% block content %}
+
+
+<section class="container-fluid p-5 bg-dark text-white">
+    <br /><br /><br />
+    <h1 class="text-center">Welcome to Prabhanjan's Blog</h1>
+</section>
+
+<section class="container pt-5">
+    <div class="row">
+        {% for post in posts %}
+        {% include 'blog/includes/post.html' %}
+        {% endfor %}
+    </div>
+</section>
+
+
+{% endblock %}

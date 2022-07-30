@@ -1,0 +1,22 @@
+{% extends 'skeleton.html' %}
+{% load static %}
+
+
+{% block styless %}
+<link rel="stylesheet" href="{% static 'blog/post.css' %}">
+
+<link rel="stylesheet" href="{% static 'blog/all-posts.css' %}">
+{% endblock %}
+{% block title%}Prabhanjan's Blog : All My Post's {% endblock %}
+
+{% block content %}
+<div id="all-posts">
+    <h2>My Collected Posts</h2>
+
+    <ul>
+        {% for post in all_posts %}
+            {% include 'blog/includes/post.html' %}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
